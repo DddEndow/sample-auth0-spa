@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('jwt')->get('/private', function (Request $request) {
+    return response()->json([
+        "auth0_user_id" => $request['auth0_user_id'],
+        "message" => "プライベートなエンドポイントへようこそ！これを表示するには有効なアクセストークンが必要です。"
+    ]);
+});
